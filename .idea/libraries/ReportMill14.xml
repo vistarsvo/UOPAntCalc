@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ReportMill14">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/ReportMill14.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

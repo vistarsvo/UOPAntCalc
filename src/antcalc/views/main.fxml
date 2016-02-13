@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400" minWidth="500" prefHeight="480.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="antcalc.views.MainView">
+   <children>
+      <TabPane fx:id="mainTabPanel" layoutX="14.0" layoutY="25.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab fx:id="main" text="Данные для расчета">
+            <content>
+              <AnchorPane fx:id="inputPanel" minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <ImageView fx:id="imageViewPanel" opacity="0.26" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <image>
+                              <Image url="@../pictures/background.png" />
+                           </image>
+                           <viewport>
+                              <Rectangle2D />
+                           </viewport>
+                        </ImageView>
+                        <GridPane layoutX="14.0" layoutY="31.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="80.0" prefWidth="80.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="30.0" prefWidth="30.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="300.0" prefWidth="300.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Separator prefWidth="200.0" GridPane.rowIndex="7" />
+
+                              <Label text="N:" />
+                              <Label text="Nc:" GridPane.rowIndex="1" />
+                              <Label text="Кд" GridPane.rowIndex="2" />
+                              <Label text="ε:" GridPane.rowIndex="3" />
+                              <Label text="m:" GridPane.rowIndex="4" />
+                              <Label text="Δφ (max):" GridPane.rowIndex="5" />
+                              <Label text="Δa Σ:" GridPane.rowIndex="6" />
+                              <Label text="Итераций:" GridPane.rowIndex="8" />
+
+
+                              <TextField fx:id="inputN" onKeyReleased="#handleKeyAction" promptText="24" text="24" GridPane.columnIndex="1" />
+                              <TextField fx:id="inputNc" onKeyReleased="#handleKeyAction" promptText="8" text="8" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="inputKd" onKeyReleased="#handleKeyAction" promptText="25.9" text="25.9" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="inputE" onKeyReleased="#handleKeyAction" text="0.15" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="inputM" onKeyReleased="#handleKeyAction" promptText="1" text="1" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <TextField fx:id="inputDeltaFiMax" onKeyReleased="#handleKeyAction" promptText="30" text="30" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <TextField fx:id="inputDeltaASigma" onKeyReleased="#handleKeyAction" promptText="0.1" text="0.1" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="inputIterations" onKeyReleased="#handleKeyAction" promptText="100" text="100" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+
+                              <Label text="Целое число от 1 до 100" textFill="#8f8f8f" GridPane.columnIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Целое число от 1 до 100" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Целое число от 1 до 100" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Целое число от 0 до 360 (переводится в радианы)" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Число с плавающей запятой от 0 до 1" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Число с плавающей запятой" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Число с плавающей запятой" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="3">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <Label text="Число с плавающей запятой от 0 до 5" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </Label>
+                              <ImageView fx:id="errorN" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorNc" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorKd" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorE" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorM" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorDeltaFiMax" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorDeltaASigma" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <ImageView fx:id="errorIterations" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                                 <image>
+                                    <Image url="@../pictures/error_icon.png" />
+                                 </image>
+                              </ImageView>
+                              <Separator prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                              <Separator prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                              <Separator prefWidth="200.0" GridPane.rowIndex="9" />
+                              <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                              <Separator prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                              <Separator prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                              <CheckBox fx:id="noErrors" mnemonicParsing="false" text="Да/Нет" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                              <Label text="Без ошибок:" GridPane.rowIndex="10" />
+                              <Label text="Да (галочка есть) - A(i) = 1, Расчет на 1 итерацию" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
+                        <ToolBar nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="startCalculation" mnemonicParsing="false" onAction="#handleStartCalculationAction" text="Провести расчеты" textAlignment="CENTER" />
+                          </items>
+                        </ToolBar>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="table1" disable="true" text="Таблица 1">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="firstTable" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                          <columns>
+                            <TableColumn fx:id="iterColumn" maxWidth="80.0" minWidth="80.0" text="Итерация" />
+                            <TableColumn fx:id="firstColumn" maxWidth="160.0" minWidth="100.0" prefWidth="160.0" text="Макс. первого лепестка" />
+                              <TableColumn fx:id="sixColumn" maxWidth="160.0" minWidth="100.0" prefWidth="160.0" text="Макс. до 60 градусов" />
+                            <TableColumn fx:id="oreolColumn" maxWidth="160.0" minWidth="100.0" prefWidth="160.0" text="Макс. ореола" />
+                              <TableColumn fx:id="fmaxColumn" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" text="1й макс." />
+                          </columns>
+                        </TableView>
+                        <ToolBar layoutX="55.0" layoutY="385.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="printTableOne" disable="true" mnemonicParsing="false" onAction="#handlePrintTableOneAction" text="Распечатать таблицу" />
+                          </items>
+                        </ToolBar>
+                        <Label text="Сводная таблица №1" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="table2" disable="true" text="Таблица 2">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <ToolBar layoutY="371.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                            <Button fx:id="printTableTwo" disable="true" mnemonicParsing="false" onAction="#handlePrintTableTwoAction" text="Распечатать таблицу" />
+                          </items>
+                        </ToolBar>
+                        <Label layoutX="14.0" layoutY="6.0" text="Сводная таблица №2" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <TableView fx:id="secondTable" layoutX="4.0" layoutY="23.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                          <columns>
+                              <TableColumn fx:id="descrColumn" maxWidth="120.0" minWidth="120.0" prefWidth="120.0" text="-" />
+                              <TableColumn fx:id="c_03_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.3" />
+                            <TableColumn fx:id="c_025_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.25" />
+                            <TableColumn fx:id="c_02_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.2" />
+                              <TableColumn fx:id="c_018_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.18" />
+                              <TableColumn fx:id="c_016_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.16" />
+                              <TableColumn fx:id="c_014_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.14" />
+                              <TableColumn fx:id="c_012_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.12" />
+                              <TableColumn fx:id="c_01_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.1" />
+                              <TableColumn fx:id="c_008_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.08" />
+                              <TableColumn fx:id="c_006_Column" maxWidth="55.0" minWidth="55.0" prefWidth="55.0" text="0.06" />
+                          </columns>
+                        </TableView>
+                     </children></AnchorPane>
+              </content>
+            </Tab>
+          <Tab fx:id="results" disable="true" text="Результаты">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0">
+                     <children>
+                        <ToolBar layoutX="172.0" layoutY="391.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                          <items>
+                              <Label text="Расчеты по итерации №" />
+                              <ComboBox fx:id="comboBox" prefWidth="80.0">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </ComboBox>
+                            <Button fx:id="showResults" alignment="CENTER" layoutX="20.0" mnemonicParsing="false" onAction="#handleShowResultsAction" text="Посмотреть">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Button>
+                          </items>
+                        </ToolBar>
+                        <TableView fx:id="resultsTable" layoutX="6.0" minWidth="340.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="280.0" AnchorPane.topAnchor="20.0">
+                          <columns>
+                              <TableColumn fx:id="alphaColumn" maxWidth="60.0" minWidth="50.0" prefWidth="50.0" text="#" />
+                            <TableColumn fx:id="dgColumn" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="-1.0" text="Dg" />
+                            <TableColumn fx:id="raColumn" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="-1.0" text="Ra" />
+                              <TableColumn fx:id="rnaColumn" maxWidth="1.7976931348623157E308" minWidth="80.0" prefWidth="-1.0" text="Rna" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="randomTable" maxWidth="260.0" minWidth="260.0" prefWidth="260.0" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                          <columns>
+                            <TableColumn fx:id="ncColumn" maxWidth="80.0" minWidth="80.0" text="# Nc" />
+                            <TableColumn fx:id="sigmaColumn" maxWidth="80.0" minWidth="80.0" text="SigmaNc" />
+                              <TableColumn fx:id="deltaColumn" maxWidth="80.0" minWidth="80.0" text="DeltaNc" />
+                          </columns>
+                        </TableView>
+                        <Label fx:id="resultsLable" text="График по итерации №1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="randomsLable" layoutX="380.0" prefWidth="260.0" text="Случайные числа по итерации №1" AnchorPane.rightAnchor="0.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="graphiksnorm" disable="true" text="Нормированный график">
+              <content>
+                <AnchorPane fx:id="graphiksnormPaneInside" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane fx:id="graphiksnormPane" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ToolBar layoutX="14.0" layoutY="385.0" maxHeight="40.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                           <items>
+                              <Label text="График по итерации №" />
+                              <ComboBox fx:id="comboBoxG" prefWidth="80.0" />
+                              <Button mnemonicParsing="false" onAction="#handleShowGraphNormAction" text="Посмотреть" />
+                           </items>
+                        </ToolBar>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="graphiks" disable="true" text="График">
+              <content>
+                <AnchorPane fx:id="graphiksPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+         <padding>
+            <Insets top="26.0" />
+         </padding>
+      </TabPane>
+      <MenuBar fx:id="mainNavBar" layoutX="123.0" layoutY="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Главное меню">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleResetAction" text="Сбросить расчеты" />
+              <MenuItem mnemonicParsing="false" onAction="#handleExitAction" text="Выход" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Расчеты">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleStartCalculationAction" text="Расчитать" />
+                  <MenuItem fx:id="startCalculationMI" disable="true" mnemonicParsing="false" text="Экспортировать результаты" visible="false" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Помощь">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleAuthorAction" text="О авторе" />
+              <MenuItem mnemonicParsing="false" onAction="#handleAboutAction" text="О программе" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
