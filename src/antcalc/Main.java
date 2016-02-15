@@ -11,6 +11,8 @@ import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
+    public static Stage stage;
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 
@@ -32,6 +34,7 @@ public class Main extends Application {
             }
         });
 
+        stage = primaryStage;
     }
 
 

@@ -2,27 +2,26 @@ package antcalc.views;
 
 import antcalc.Main;
 import antcalc.controllers.MainController;
+import antcalc.helpers.exporters;
 import antcalc.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.print.Printer;
-import javafx.print.PrinterJob;
 import javafx.scene.control.*;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 
-import javax.swing.*;
-import java.awt.print.PrinterException;
 import java.io.File;
 import java.net.URL;
-import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -104,6 +103,103 @@ public class MainView implements Initializable {
 
     public CheckBox noErrors;
 
+    public MenuItem exportAll;
+
+    @FXML
+    private void handleExportAllAction(final ActionEvent event) {
+        Date myDate = new Date();
+        String folder = new SimpleDateFormat("yyyy-MM-dd").format(myDate);
+
+        Alert alertN = new Alert(Alert.AlertType.INFORMATION);
+        alertN.setTitle("Экcпорт данных");
+        alertN.setHeaderText("Обратите внимание, будет создана папка " + "antCalc_" + String.valueOf(folder));
+        alertN.setContentText("В эту папку будут помещены все данные расчетов");
+        alertN.showAndWait();
+
+
+
+        DirectoryChooser myDir = new DirectoryChooser();
+        myDir.setTitle("Экспорт всех расчетов");
+        File file = myDir.showDialog(Main.stage);
+        if (file != null) {
+            String path = file.getAbsolutePath();
+            path += System.getProperty("file.separator");
+            path += "antCalc_" + String.valueOf(folder);
+            Boolean result = false;
+            File theDir = new File(path);
+
+            if (!theDir.exists()) {
+                try {
+                    theDir.mkdir();
+                    result = true;
+                } catch (SecurityException se) {
+
+                }
+            } else {
+                System.out.println("exists");
+            }
+            if (result == true) {
+                exporters.exportAll(path, this);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Экcпорт данных");
+                alert.setHeaderText("Возникла ошибка при создании директории");
+                alert.setContentText(path);
+                alert.showAndWait();
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Экcпорт данных");
+            alert.setHeaderText(null);
+            alert.setContentText("Экспорт всех данных отменен");
+            alert.showAndWait();
+        }
+    }
+
+
+    @FXML
+    private void handleTableOneCSVAction(final ActionEvent event) {
+        FileChooser myFile = new FileChooser();
+        myFile.setInitialFileName("table_one.csv");
+        myFile.setTitle("Экспорт таблицы №1 в csv");
+        myFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV doc(*.csv)", "*.csv"));
+        File file = myFile.showSaveDialog(Main.stage);
+        if (file != null) {
+            String path = file.getAbsolutePath();
+            if (!file.getName().contains(".")) {
+                path += ".csv";
+            }
+            exporters.exportTableOne(path, firstTable);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Экcпорт в файл");
+            alert.setHeaderText(null);
+            alert.setContentText("Экспорт таблицы 1 в файл отменен");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void handleTableTwoCSVAction(final ActionEvent event) {
+        FileChooser myFile = new FileChooser();
+        myFile.setInitialFileName("table_two.csv");
+        myFile.setTitle("Экспорт таблицы №2 в csv");
+        myFile.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV doc(*.csv)", "*.csv"));
+        File file = myFile.showSaveDialog(Main.stage);
+        if (file != null) {
+            String path = file.getAbsolutePath();
+            if (!file.getName().contains(".")) {
+                path += ".csv";
+            }
+            exporters.exportTableTwo(path, secondTable);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Экcпорт в файл");
+            alert.setHeaderText(null);
+            alert.setContentText("Экспорт таблицы 2 в файл отменен");
+            alert.showAndWait();
+        }
+    }
 
     @FXML
     private void handleAuthorAction(final ActionEvent event)
@@ -188,9 +284,10 @@ public class MainView implements Initializable {
                     startCalculationMI.setDisable(false);
                     results.setDisable(false);
                     graphiks.setDisable(true);
-                    graphiksnorm.setDisable(true);
+                    graphiksnorm.setDisable(false);
                     table1.setDisable(false);
                     table2.setDisable(false);
+                    exportAll.setDisable(false);
 
                     Map<String, Float> dataFloat = new HashMap<>();
                     Map<String, Integer> dataInteger = new HashMap<>();
@@ -253,6 +350,7 @@ public class MainView implements Initializable {
             graphiksnorm.setDisable(true);
             table1.setDisable(true);
             table2.setDisable(true);
+            exportAll.setDisable(true);
 
             inputN.setText("24");
             inputNc.setText("8");
