@@ -1,12 +1,18 @@
 package antcalc.helpers;
 
+import antcalc.models.MainCalculation;
+import antcalc.models.ResultsCalculation;
 import antcalc.models.TableFirst;
 import antcalc.models.TableSecond;
+import antcalc.views.CoolChartFrame;
 import antcalc.views.MainView;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
+import org.jfree.chart.fx.ChartViewer;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -154,7 +160,97 @@ public class exporters {
     }
 
     public static void exportTablesResultsAndNc(String path, MainView mainView) {
+        int numberIteration = Integer.parseInt(mainView.inputIterations.getText());
+        if (mainView.noErrors.isSelected()) numberIteration = 1;
+        for (int iter = 1; iter <= numberIteration; iter++) {
 
+            float[] dg      = ResultsCalculation.hMapDG.get(iter);
+            float[] ra      = ResultsCalculation.hMapRA.get(iter);
+            float[] rna     = ResultsCalculation.hMapRNA.get(iter);
+            float[] sigma   = ResultsCalculation.hMapSigmaNC.get(iter);
+            float[] delta   = ResultsCalculation.hMapDeltaNC.get(iter);
+
+            File file = new File(path + "results_" + String.valueOf(iter) + ".csv");
+            String[] data = new String[3];
+            data[0] = "Угол";
+            data[1] = "Ra";
+            data[2] = "Rna";
+            try {
+                csvwriter csv = new csvwriter(file, System.getProperty("file.encoding"));
+                csv.writeHeader(data);
+                for (int alpha = 1; alpha <= 181; alpha += MainCalculation.dal) {
+                    data[0] = String.valueOf(dg[alpha]);
+                    data[1] = String.valueOf(ra[alpha]);
+                    data[2] = String.valueOf(rna[alpha]);
+                    csv.writeData(data);
+                }
+                csv.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Экcпорт в файл");
+                alert.setHeaderText(null);
+                alert.setContentText("Возникла ошибка при экспорте результатов");
+                alert.showAndWait();
+            }
+
+            if (!mainView.noErrors.isSelected()) {
+                file = new File(path + "randoms_" + String.valueOf(iter) + ".csv");
+                data = new String[3];
+                data[0] = "Nc";
+                data[1] = "Sigma";
+                data[2] = "Delta";
+                try {
+                    csvwriter csv = new csvwriter(file, System.getProperty("file.encoding"));
+                    csv.writeHeader(data);
+                    for (int nc = 1; nc <= Integer.parseInt(mainView.inputNc.getText()); nc += 1) {
+                        data[0] = String.valueOf(nc);
+                        data[1] = String.valueOf(sigma[nc]);
+                        data[2] = String.valueOf(delta[nc]);
+                        csv.writeData(data);
+                    }
+                    csv.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Экcпорт в файл");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Возникла ошибка при экспорте результатов");
+                    alert.showAndWait();
+                }
+            }
+
+            mainView.graphiksnormPane.getChildren().clear();
+            ChartViewer chartNormViewer = new ChartViewer(CoolChartFrame.createChart("Нормированный график по итерации №" + String.valueOf(iter), ResultsCalculation.hMapDG.get(iter), ResultsCalculation.hMapRNA.get(iter)), true);
+            chartNormViewer.setPrefWidth(mainView.graphiksnormPane.getWidth());
+            chartNormViewer.setPrefHeight(mainView.graphiksnormPane.getHeight());
+            mainView.graphiksnormPane.getChildren().add(chartNormViewer);
+
+            try {
+                // retrieve image
+                BufferedImage bi = chartNormViewer.getChart().createBufferedImage(800,600);
+                File outputfile = new File(path + "normGraph_" + String.valueOf(iter) + ".png");
+                ImageIO.write(bi, "png", outputfile);
+            } catch (IOException e) {
+                System.out.println("Error... Image save");
+            }
+
+            mainView.graphiksPane.getChildren().clear();
+            ChartViewer chartViewer = new ChartViewer(CoolChartFrame.createChart("График по итерации №" + String.valueOf(iter), ResultsCalculation.hMapDG.get(iter), ResultsCalculation.hMapRA.get(iter)), true);
+            chartViewer.setPrefWidth(mainView.graphiksPane.getWidth());
+            chartViewer.setPrefHeight(mainView.graphiksPane.getHeight());
+            mainView.graphiksPane.getChildren().add(chartViewer);
+
+            try {
+                // retrieve image
+                BufferedImage bi = chartViewer.getChart().createBufferedImage(800,600);
+                File outputfile = new File(path + "graph_" + String.valueOf(iter) + ".png");
+                ImageIO.write(bi, "png", outputfile);
+            } catch (IOException e) {
+                System.out.println("Error... Image save");
+            }
+
+        }
     }
 }
 
