@@ -164,7 +164,7 @@ public class MainController {
         for (int i = 1; i <= dataInteger.getOrDefault("Iterator", 1); i++) {
             mainView.comboBox.getItems().addAll("" + String.valueOf(i));
             mainView.comboBoxG.getItems().addAll("" + String.valueOf(i));
-            mainCalculation.calculateAll(mainView.noErrors.isSelected());
+            mainCalculation.calculateAll(mainView.noErrors.isSelected(), mainView.aRasp.isSelected());
 
             ResultsCalculation.hMapDG.put(i,mainCalculation.getDg());
             ResultsCalculation.hMapRA.put(i,mainCalculation.getRa());

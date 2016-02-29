@@ -44,6 +44,7 @@
                               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="10.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <Separator prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
@@ -78,7 +79,7 @@
                                     <Insets left="10.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label text="Целое число от 1 до 100" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                              <Label text="Целое число от 1 до 1000" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="8">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -157,6 +158,13 @@
                               <CheckBox fx:id="noErrors" mnemonicParsing="false" text="Да/Нет" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                               <Label text="Без ошибок:" GridPane.rowIndex="10" />
                               <Label text="Да (галочка есть) - A(i) = 1, Расчет на 1 итерацию" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label text="Arasp" GridPane.rowIndex="11" />
+                              <CheckBox fx:id="aRasp" mnemonicParsing="false" text="=1" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                              <Label text="Да (галочка есть) - Arasp(i) = 1" textFill="#8f8f8f" GridPane.columnIndex="3" GridPane.rowIndex="11">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>

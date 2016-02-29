@@ -30,9 +30,11 @@ public class MainCalculation {
 
         private float DeltaFiMax;
         private boolean noErrors;
+        private boolean AraspOne;
 
-        public void calculateAll(boolean setNoErrors) {
+        public void calculateAll(boolean setNoErrors, boolean setArasp) {
             noErrors = setNoErrors;
+            AraspOne = setArasp;
             int i       = 0;
             int dala    = (int) dal;
             float a     = 0f;
@@ -184,8 +186,13 @@ public class MainCalculation {
 
         // #5
         private float Arasp(float Psi, float PsiFirst) {
-            float part = (float) (Math.sin(Psi) / Math.sin(PsiFirst));
-            return (float) (Math.abs(Math.cos(Psi)) * Math.exp(-m * (part * part)));
+            if (AraspOne) {
+                return 1f;
+            }
+            else {
+                float part = (float) (Math.sin(Psi) / Math.sin(PsiFirst));
+                return (float) (Math.abs(Math.cos(Psi)) * Math.exp(-m * (part * part)));
+            }
         }
 
         // #6

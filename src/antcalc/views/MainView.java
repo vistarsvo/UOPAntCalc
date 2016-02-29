@@ -102,6 +102,7 @@ public class MainView implements Initializable {
     public TableColumn<TableSecond, Integer> c_006_Column;
 
     public CheckBox noErrors;
+    public CheckBox aRasp;
 
     public MenuItem exportAll;
 
