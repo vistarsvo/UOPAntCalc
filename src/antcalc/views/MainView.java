@@ -457,7 +457,7 @@ public class MainView implements Initializable {
     }
 
     private boolean validatorIterations(String text) {
-        boolean validateResult = InputValidator.integerValidator(text, 1, 100);
+        boolean validateResult = InputValidator.integerValidator(text, 1, 1000);
         errorIterations.setVisible(!validateResult);
         return validateResult;
     }
